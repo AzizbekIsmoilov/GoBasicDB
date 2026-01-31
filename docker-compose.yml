@@ -1,0 +1,28 @@
+services:
+#  app:
+#    build: .
+#    container_name: go_app
+#    ports:
+#      - "8080:8080"
+#    env_file:
+#      - .env
+#    volumes:
+#      - .:/app
+#    depends_on:
+#      - postgres
+
+  postgres:
+    image: postgres:16
+    container_name: go_postgres
+    environment:
+      POSTGRES_DB: go_db
+      POSTGRES_USER: go_user
+      POSTGRES_PASSWORD: go_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./docker/postgres:/docker-entrypoint-initdb.d
+
+volumes:
+  pg_data:
